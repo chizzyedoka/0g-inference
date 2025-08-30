@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import WalletConnect from './components/WalletConnect';
 import InferenceClient from './components/InferenceClient';
 import LogsDisplay from './components/LogsDisplay';
+import MetaMaskTest from './components/MetaMaskTest';
 import './App.css';
 
 function App() {
@@ -20,6 +21,20 @@ function App() {
     setLogs([]);
   }, []);
 
+  useEffect(() => {
+    // Log browser and MetaMask information on app start
+    addLog("App initialized");
+    addLog(`User Agent: ${navigator.userAgent.split(') ')[0]})`);
+    
+    if (typeof window.ethereum !== "undefined") {
+      addLog("Ethereum object detected in window");
+      addLog(`isMetaMask: ${window.ethereum.isMetaMask}`);
+      addLog(`networkVersion: ${window.ethereum.networkVersion || 'unknown'}`);
+    } else {
+      addLog("No Ethereum object found - MetaMask may not be installed");
+    }
+  }, [addLog]);
+
   return (
     <div className="bg-gray-100 min-h-screen py-6">
       <div className="container mx-auto px-4">
@@ -27,6 +42,8 @@ function App() {
           <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
             0G Labs Inference Client
           </h1>
+          
+          <MetaMaskTest />
           
           <WalletConnect 
             isConnected={isConnected}

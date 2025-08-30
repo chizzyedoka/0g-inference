@@ -19,7 +19,13 @@ module.exports = {
         "url": require.resolve("url/"),
         "util": require.resolve("util/"),
         "os": require.resolve("os-browserify/browser"),
-        "readline": false
+        "readline": false,
+        "vm": false,
+        "net": false,
+        "tls": false,
+        "zlib": false,
+        "constants": false,
+        "dns": false
       };
 
       // Add plugins for global variables
@@ -29,6 +35,11 @@ module.exports = {
           Buffer: ['buffer', 'Buffer'],
           process: 'process/browser',
         }),
+      ];
+
+      // Suppress source map warnings
+      webpackConfig.ignoreWarnings = [
+        /Failed to parse source map/,
       ];
 
       return webpackConfig;
