@@ -281,7 +281,7 @@ const runInference = async () => {
     addLog(`Using endpoint: ${endpoint}`, 'info')
     addLog(`Using model: ${model}`, 'info')
     
-    // Enhanced debugging
+    // Enhanced debuggingnp,mn
     addLog(`Provider type: ${typeof currentService?.provider}`, 'info')
     addLog(`Provider exists: ${!!currentService?.provider}`, 'info')
     addLog(`Provider value: ${currentService?.provider}`, 'info')
